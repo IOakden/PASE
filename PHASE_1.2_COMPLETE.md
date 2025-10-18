@@ -13,9 +13,12 @@
 - [x] Generated `data/asbench/asbench_annotations_raw.csv` - Raw CSV export
 - [x] Generated `data/asbench/pdb_list.txt` - List of 230 unique PDB IDs
 
-### 3. PDB Download Infrastructure
-- [x] Created `scripts/download_missing_pdbs.py` - Script to download missing PDBs (for future use)
-- [x] Verified all 230 PDB structures are present
+### 3. PDB Files
+- [x] Copied 235 PDB files from ASBench `allosteric_proteins/` directory
+- [x] Created `scripts/download_missing_pdbs.py` - Utility script for future use (not required for this project)
+  - **Purpose**: Download clean PDB files from RCSB if needed
+  - **Use case**: Get updated structures, work with custom protein lists, download without ASBench naming
+  - **Note**: Not needed for current workflow since ASBench includes all files
 
 ### 4. Documentation
 - [x] Created `data/asbench/DATASET_SUMMARY.md` - Comprehensive dataset overview
@@ -23,10 +26,13 @@
 ## Key Findings
 
 ### Dataset Statistics
-- **Total entries**: 235
+- **Total entries**: 235 (allosteric sites)
 - **Unique proteins**: 230 PDB IDs
+- **PDB files**: 235 (some proteins have multiple sites)
 - **Unique chains**: 12 (A-L)
-- **PDB structures**: All 230 downloaded ✅
+- **File source**: Copied from ASBench distribution ✅
+
+**Why 235 files for 230 proteins?** Some proteins have multiple allosteric sites with different modulators. Each site gets a separate entry and PDB file with ASBench naming: `AS{site_id}_{pdb_id}.pdb`
 
 ### Annotation Format
 The ASBench annotations include:

@@ -13,7 +13,18 @@ The ASBench Core Set contains experimentally validated allosteric proteins with 
 - **Total Entries**: 235
 - **Unique Proteins (PDB IDs)**: 230
 - **Unique Chains**: 12
-- **PDB Files Downloaded**: 235
+- **PDB Files**: 235
+
+### Why 235 Files but Only 230 Unique PDB IDs?
+
+Some proteins have **multiple allosteric sites** with different modulators or residue positions. Each site gets its own entry and PDB file.
+
+**Example**: Pyruvate Kinase M (PKM) appears 3 times:
+- Entry 1: `4B2D` with Serine activator at residue 1532
+- Entry 2: `3H6O` with FBP activator at residue 541
+- Entry 3: `4G1N` with NZT activator at residue 603
+
+This is expected and correct - we want to train on all known allosteric sites.
 
 ## Data Structure
 
@@ -22,8 +33,22 @@ The ASBench Core Set contains experimentally validated allosteric proteins with 
 1. **`AsBench_Core_Set.xls`** - Original Excel file from ASBench
 2. **`asbench_annotations_raw.csv`** - Raw CSV export of Excel file
 3. **`asbench_annotations.csv`** - Structured annotations with cleaned columns
-4. **`pdb_list.txt`** - List of 230 unique PDB IDs
+4. **`pdb_list.txt`** - List of 230 unique PDB IDs (for reference)
 5. **`../../pdb/*.pdb`** - 235 PDB structure files
+
+### PDB File Naming Convention
+
+ASBench provides PDB files with prefixed naming:
+```
+AS{allosteric_site_id}_{pdb_id}.pdb
+```
+
+**Examples**:
+- `AS001000501_3UO9.pdb` → Allosteric site AS001000501 in protein 3UO9
+- `AS001001701_4B2D.pdb` → Allosteric site AS001001701 in protein 4B2D
+- `AS001001702_3H6O.pdb` → Allosteric site AS001001702 in protein 3H6O
+
+The prefix indicates which allosteric site annotation the file corresponds to. Multiple files may share the same PDB ID if the protein has multiple allosteric sites.
 
 ### Annotation Fields
 

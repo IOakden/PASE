@@ -1,6 +1,23 @@
 #!/usr/bin/env python3
 """
-Download missing PDB structures from RCSB.
+Download PDB structures from RCSB.
+
+PURPOSE:
+  Utility script to download clean PDB files directly from RCSB PDB database.
+  This is NOT required for the current project since ASBench includes all PDB files.
+
+USE CASES:
+  1. Download clean PDB files without ASBench naming prefix
+  2. Get updated/revised structures from RCSB
+  3. Work with custom protein lists beyond ASBench
+  4. Re-download if files become corrupted
+
+CURRENT WORKFLOW:
+  We copied PDB files directly from ASBench distribution:
+    ASBench provides: AS001000501_3UO9.pdb (with site ID prefix)
+    This script gets: 3UO9.pdb (clean PDB ID only)
+  
+  Both formats work fine - this script is optional infrastructure.
 """
 
 import os
