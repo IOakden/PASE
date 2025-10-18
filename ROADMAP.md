@@ -10,10 +10,9 @@
 - [x] Create config.yaml for hyperparameters and paths
 
 ### 1.2 Data Acquisition
-- [ ] Download ASBench Core Set (http://mdl.shsmu.edu.cn/ASBench/) → `data/asbench/ASBench_Core_Set.xls`
-- [ ] Parse ASBench XLS: extract PDB ID, Chain ID, Residue IDs, annotations
-- [ ] Download 320 PDB structures using Biopython PDBList
-- [ ] Optional: Download CATALYTIC SITE ATLAS for active site annotations
+- [x] Download ASBench Core Set (http://mdl.shsmu.edu.cn/ASBench/) → `data/asbench/ASBench_Core_Set.xls`
+- [x] Parse ASBench XLS: extract PDB ID, Chain ID, Residue IDs, annotations
+- [x] Download 230 PDB structures (already included with ASBench)
 
 ---
 
