@@ -6,7 +6,7 @@ This project predicts allosteric sites on proteins using a Graph-based Geometric
 
 ## Motivation
 
-Allosteric sites regulate protein activity by binding modulators at locations distinct from the active site. Predicting these sites computationally can accelerate drug discovery and deepen our understanding of protein regulation.
+Allosteric sites regulate protein activity by binding modulators at locations distinct from the active site. When they bind a modulator, they regulate a change at the active site. Predicting these sites computationally can accelerate drug discovery and deepen our understanding of protein regulation. 
 
 ## Datasets
 
@@ -49,7 +49,7 @@ Label atoms/residues as:
 
 ### 3. Graph Construction
 
-**Nodes**: residues or atoms (atom-level recommended for fine-grained geometric modeling)
+**Nodes**: Nodes will represent individual residues
 
 **Node features**:
 - Chemical type (one-hot encoding)
@@ -59,6 +59,40 @@ Label atoms/residues as:
 **Edges**:
 - Distance-based connectivity (e.g., edges between nodes < 8 Å apart)
 - Optional: covalent bond information
+Proximity Edges:
+
+Derivation: Calculated distance between Cα atoms (or residue centroids) < 8 Å.
+
+s_edge Feature: Inverse Distance (1 / r₍ᵢⱼ₎). This scalar emphasizes the strength of short-range interactions.
+
+Direction Vector:
+
+Derivation: Calculated unit vector pointing from node i to node j.
+
+v_edge Feature: Normalized Direction Vector (u₍ᵢⱼ₎). This vector preserves geometric equivariance, which is fundamental to the GVP-GNN architecture.
+
+Functional and Dynamic Edge Features
+
+These features encode specific non-covalent interactions and dynamic communication pathways, making the prediction functionally relevant.
+
+Specific Non-Covalent Interactions:
+
+Derivation: Calculated from full atomic coordinates using precise geometric and chemical criteria (distances/angles) for specific bonds.
+
+s_edge Feature: One-Hot Vector encoding the strongest contact type between residues i and j.
+Categories typically include:
+
+Hydrogen Bond
+
+Salt Bridge
+
+Hydrophobic Contact
+
+Allosteric Path / Dynamic Coupling:
+
+Derivation: Critical External Calculation. This feature requires running Molecular Dynamics (MD) or Normal Mode Analysis (NMA) to model residue movement.
+
+s_edge Feature: Dynamic Coupling Score (DCS₍ᵢⱼ₎). This scalar quantifies the motion correlation between residues and is the strongest indicator of a communication pathway.
 
 **Edge features**:
 - Euclidean distance
