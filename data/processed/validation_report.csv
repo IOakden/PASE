@@ -1,0 +1,236 @@
+pdb_file,pdb_id,chain_id,total_residues,allosteric_residues,missing_residues,annotation_matched,resolution,status,notes
+AS001000501_3UO9.pdb,3UO9,B,401,0,63,False,,failed,Modulator 2 not found or no nearby protein residues in chain B; Modulator not found in structure; No allosteric residues found near modulator
+AS001001701_4B2D_complex.pdb,4B2D,A,518,16,0,True,,ok,Found 16 allosteric residues within 5Å of modulator
+AS001001702_3H6O_complex.pdb,3H6O,A,490,25,28,True,,warning,28 missing residues (5.7%); Found 25 allosteric residues
+AS001001703_4G1N.pdb,4G1N,A,518,0,0,False,,failed,Modulator 603 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001002201_2VGI_complex.pdb,2VGI,A,517,25,0,True,,ok,Found 25 allosteric residues within 5Å of modulator
+AS001002301_2YHD.pdb,2YHD,A,249,0,0,False,,failed,Modulator 1921 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001002302_2YLO_complex.pdb,2YLO,A,250,18,0,True,,ok,Found 18 allosteric residues within 5Å of modulator
+AS001002601_3O96_complex.pdb,3O96,A,367,37,61,True,,warning,61 missing residues (16.6%); Found 37 allosteric residues
+AS001003001_1GZ3_complex.pdb,1GZ3,A,554,12,0,True,,ok,Found 12 allosteric residues within 5Å of modulator
+AS001003801_4MDK_complex.pdb,4MDK,A,168,21,10,True,,warning,10 missing residues (6.0%); Found 21 allosteric residues
+AS001003901_3KCG_complex.pdb,3KCG,I,419,24,10,True,,warning,10 missing residues (2.4%); Found 24 allosteric residues
+AS001004501_3PTZ.pdb,3PTZ,A,458,0,7,False,,failed,Modulator 501 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001005901_2XJC_complex.pdb,2XJC,A,463,14,23,True,,warning,23 missing residues (5.0%); Found 14 allosteric residues
+AS001006101_4BZB.pdb,4BZB,A,481,0,6,False,,failed,Modulator 800 not found or no nearby protein residues in chain A; Modulator 900 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001006401_4NBN.pdb,4NBN,B,242,0,20,False,,failed,Modulator 401 not found or no nearby protein residues in chain B; Modulator not found in structure; No allosteric residues found near modulator
+AS001006501_3PYY_complex.pdb,3PYY,A,265,20,4,True,,warning,4 missing residues (1.5%); Found 20 allosteric residues
+AS001007301_1SHJ_complex.pdb,1SHJ,A,208,17,39,True,,warning,39 missing residues (18.8%); Found 17 allosteric residues
+AS001007501_3RNN_complex.pdb,3RNN,A,259,18,0,True,,ok,Found 18 allosteric residues within 5Å of modulator
+AS001007601_4AW0.pdb,4AW0,A,283,0,2,False,,failed,Modulator 600 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001008001_3M6F_complex.pdb,3M6F,A,180,26,0,True,,ok,Found 26 allosteric residues within 5Å of modulator
+AS001008601_3ZCW.pdb,3ZCW,A,321,0,25,False,,failed,Modulator 1366 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001008602_4BBG.pdb,4BBG,A,336,0,14,False,,failed,Modulator 1370 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001009301_3CEH.pdb,3CEH,A,794,0,15,False,,failed,Modulator 833 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001009302_1EM6_complex.pdb,1EM6,A,787,19,22,True,,warning,22 missing residues (2.8%); Found 19 allosteric residues
+AS001009303_3DD1.pdb,3DD1,A,810,0,9,False,,failed,Modulator 903 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001009901_3IFA_complex.pdb,3IFA,A,326,18,3,True,,warning,3 missing residues (0.9%); Found 18 allosteric residues
+AS001010001_2JJK.pdb,2JJK,A,320,0,8,False,,failed,Modulator 1336 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001010601_3PXF.pdb,3PXF,A,302,0,0,False,,failed,Modulator 304 not found or no nearby protein residues in chain A; Modulator 305 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001011401_3F9N_complex.pdb,3F9N,A,253,21,11,True,,warning,11 missing residues (4.3%); Found 21 allosteric residues
+AS001012101_4G8O.pdb,4G8O,D,367,0,9,False,,failed,Modulator 403 not found or no nearby protein residues in chain D; Modulator not found in structure; No allosteric residues found near modulator
+AS001012401_4HSG_complex.pdb,4HSG,A,298,13,6,True,,warning,6 missing residues (2.0%); Found 13 allosteric residues
+AS001012601_1T49.pdb,1T49,A,282,0,0,False,,failed,Modulator 301 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001012701_2BXA.pdb,2BXA,A,569,0,9,False,,failed,Modulator 2001 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001012702_3LU6.pdb,3LU6,A,578,0,0,False,,failed,Modulator 587 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001012801_1NSG.pdb,1NSG,A,108,0,0,False,,failed,Modulator 108 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001013301_4DLR.pdb,4DLR,A,166,0,0,False,,failed,Modulator 203 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001013501_4EBW.pdb,4EBW,A,259,0,17,False,,failed,Modulator 700 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001013701_3N1V.pdb,3N1V,F,343,0,0,False,,failed,Modulator 1 not found or no nearby protein residues in chain F; Modulator not found in structure; No allosteric residues found near modulator
+AS001013801_3H1V.pdb,3H1V,X,446,0,0,False,,failed,Modulator 501 not found or no nearby protein residues in chain X; Modulator not found in structure; No allosteric residues found near modulator
+AS001015002_2D5Z_complex.pdb,2D5Z,A,141,7,0,True,,ok,Found 7 allosteric residues within 5Å of modulator
+AS001015401_2O8B_complex.pdb,2O8B,A,831,20,24,True,,warning,24 missing residues (2.9%); Found 20 allosteric residues
+AS001016401_1HKB.pdb,1HKB,A,899,0,0,False,,failed,Modulator 919 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001016902_4E6C.pdb,4E6C,A,330,0,18,False,,failed,Modulator 500 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001017201_3HNC.pdb,3HNC,A,714,0,15,False,,failed,Modulator 802 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001019301_2I7P_complex.pdb,2I7P,A,353,15,9,True,,warning,9 missing residues (2.5%); Found 15 allosteric residues
+AS001019901_2BU6_complex.pdb,2BU6,A,353,16,26,True,,warning,26 missing residues (7.4%); Found 16 allosteric residues
+AS001019902_2BU7.pdb,2BU7,A,358,0,21,False,,failed,Modulator 1386 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001019903_2BU8.pdb,2BU8,A,359,0,11,False,,failed,Modulator 1379 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001021601_4C7B_complex.pdb,4C7B,A,261,21,11,True,,warning,11 missing residues (4.2%); Found 21 allosteric residues
+AS001022601_2ZMF_complex.pdb,2ZMF,A,172,26,5,True,,warning,5 missing residues (2.9%); Found 26 allosteric residues
+AS001023801_1Z8D_complex.pdb,1Z8D,A,819,21,16,True,,warning,16 missing residues (2.0%); Found 21 allosteric residues
+AS001023803_1Z8D.pdb,1Z8D,A,819,0,16,False,,failed,Modulator 902 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001023902_4CFE_complex.pdb,4CFE,A,425,13,119,True,,failed,Too many missing residues: 28.0%
+AS001024901_3H30.pdb,3H30,A,333,0,0,False,,failed,Modulator 337 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001025101_3FUD_complex.pdb,3FUD,A,606,15,0,True,,ok,Found 15 allosteric residues within 5Å of modulator
+AS001025201_4I1R.pdb,4I1R,A,353,0,30,False,,failed,Modulator 801 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001026401_1W0F.pdb,1W0F,A,459,0,15,False,,failed,Modulator 1499 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001026701_1B86_complex.pdb,1B86,D,146,4,0,True,,ok,Found 4 allosteric residues within 5Å of modulator
+AS001026702_2D60.pdb,2D60,B,145,0,0,False,,failed,Modulator 1200 not found or no nearby protein residues in chain B; Modulator not found in structure; No allosteric residues found near modulator
+AS001027201_3LW0.pdb,3LW0,A,292,0,12,False,,failed,Modulator 1 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001027601_1NE7_complex.pdb,1NE7,B,274,10,0,True,,ok,Found 10 allosteric residues within 5Å of modulator
+AS001028801_3O2M.pdb,3O2M,A,358,0,0,False,,failed,Modulator 701 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS001028901_2I7N_complex.pdb,2I7N,A,325,12,33,True,,warning,33 missing residues (10.2%); Found 12 allosteric residues
+AS001029501_4IO8_complex.pdb,4IO8,A,377,26,0,True,,ok,Found 26 allosteric residues within 5Å of modulator
+AS001030001_4JA8.pdb,4JA8,A,416,0,0,False,,failed,Modulator 502 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS002021702_2QPY.pdb,2QPY,A,248,0,0,False,,failed,Modulator 1 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS002022501_3LSW.pdb,3LSW,A,258,0,0,False,,failed,Modulator 801 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS002022502_3LSX_complex.pdb,3LSX,A,258,3,0,True,,ok,Found 3 allosteric residues within 5Å of modulator
+AS002022801_2K31.pdb,2K31,A,149,0,0,False,,failed,Modulator 1 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS002023501_3K5V.pdb,3K5V,A,286,0,1,False,,failed,Modulator 1 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS002025401_3QH0_complex.pdb,3QH0,A,552,29,-1,True,,ok,Found 29 allosteric residues within 5Å of modulator
+AS002029701_4JKT.pdb,4JKT,D,388,0,18,False,,failed,Modulator 701 not found or no nearby protein residues in chain D; Modulator not found in structure; No allosteric residues found near modulator
+AS003000401_3QOP.pdb,3QOP,A,200,0,0,False,,failed,Modulator 301 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS003001201_1FIY.pdb,1FIY,A,873,0,7,False,,failed,Modulator 884 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS003001601_2HIM.pdb,2HIM,A,324,0,10,False,,failed,Modulator 8001 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS003003701_1XMV_complex.pdb,1XMV,A,293,24,33,True,,warning,33 missing residues (11.3%); Found 24 allosteric residues
+AS003003702_3CMW.pdb,3CMW,A,1609,0,2683,False,,failed,Modulator 502 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS003009601_1XXA.pdb,1XXA,A,71,0,0,False,,failed,Modulator 1 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS003010701_1CE8_complex.pdb,1CE8,A,1058,19,15,True,,warning,15 missing residues (1.4%); Found 19 allosteric residues
+AS003010702_1CE8.pdb,1CE8,A,1058,0,15,False,,failed,Modulator 5012 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS003011501_4FYY.pdb,4FYY,B,147,0,0,False,,failed,Modulator 202 not found or no nearby protein residues in chain B; Modulator 203 not found or no nearby protein residues in chain B; Modulator 204 not found or no nearby protein residues in chain B; Modulator not found in structure; No allosteric residues found near modulator
+AS003012201_2Q8M.pdb,2Q8M,A,304,0,27,False,,failed,Modulator 341 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS003012204_2Q8M_complex.pdb,2Q8M,A,304,7,27,True,,warning,27 missing residues (8.9%); Found 7 allosteric residues
+AS003014301_4JAF_complex.pdb,4JAF,A,426,22,0,True,,ok,Found 22 allosteric residues within 5Å of modulator
+AS003014801_1EFA_complex.pdb,1EFA,A,328,26,0,True,,ok,Found 26 allosteric residues within 5Å of modulator
+AS003014901_2PA3.pdb,2PA3,A,406,0,0,False,,failed,Modulator 451 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS003016601_2R1R.pdb,2R1R,A,733,0,0,False,,failed,Modulator 762 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS003016602_3R1R_complex.pdb,3R1R,A,733,19,0,True,,ok,Found 19 allosteric residues within 5Å of modulator
+AS003017301_2WU1.pdb,2WU1,A,266,0,0,False,,failed,Modulator 1267 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS003018601_2ATS.pdb,2ATS,A,292,0,0,False,,failed,Modulator 3003 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS003019101_1PCQ.pdb,1PCQ,A,524,0,0,False,,failed,Modulator 600 not found or no nearby protein residues in chain A; Modulator 602 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS003019201_1H5S_complex.pdb,1H5S,A,290,16,0,True,,ok,Found 16 allosteric residues within 5Å of modulator
+AS003019801_4JNE.pdb,4JNE,A,600,0,4,False,,failed,Modulator 1002 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS003022001_2V4Y_complex.pdb,2V4Y,A,237,12,0,True,,ok,Found 12 allosteric residues within 5Å of modulator
+AS003025601_1KFL_complex.pdb,1KFL,A,342,17,7,True,,warning,7 missing residues (2.0%); Found 17 allosteric residues
+AS003026901_1H9G.pdb,1H9G,A,223,0,0,False,,failed,Modulator 1228 not found or no nearby protein residues in chain A; Modulator 1229 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS003027401_2J0X_complex.pdb,2J0X,A,447,15,0,True,,ok,Found 15 allosteric residues within 5Å of modulator
+AS003028002_2JFN_complex.pdb,2JFN,A,266,24,0,True,,ok,Found 24 allosteric residues within 5Å of modulator
+AS003029001_1PFK.pdb,1PFK,A,320,0,0,False,,failed,Modulator 326 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS004000201_3EPS.pdb,3EPS,A,566,0,7,False,,failed,Modulator 1604 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS005004201_3VQ8_complex.pdb,3VQ8,A,136,9,17,True,,warning,17 missing residues (12.5%); Found 9 allosteric residues
+AS005004204_3L3V_complex.pdb,3L3V,A,144,9,9,True,,warning,9 missing residues (6.2%); Found 9 allosteric residues
+AS006000701_3HQP_complex.pdb,3HQP,A,498,23,0,True,,ok,Found 23 allosteric residues within 5Å of modulator
+AS006029601_1Q5O.pdb,1Q5O,A,193,0,8,False,,failed,Modulator 201 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS007000801_4P3H_complex.pdb,4P3H,A,190,19,0,True,,ok,Found 19 allosteric residues within 5Å of modulator
+AS008000901_2PUV_complex.pdb,2PUV,B,352,21,0,True,,ok,Found 21 allosteric residues within 5Å of modulator
+AS009001001_3I54.pdb,3I54,A,224,0,5,False,,failed,Modulator 301 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS009001901_4AVC.pdb,4AVC,A,315,0,11,False,,failed,Modulator 400 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS009009101_2ZFZ.pdb,2ZFZ,A,77,0,0,False,,failed,Modulator 300 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS009012901_3KGF_complex.pdb,3KGF,A,452,9,9,True,,warning,9 missing residues (2.0%); Found 9 allosteric residues
+AS009012902_3KGF.pdb,3KGF,A,452,0,9,False,,failed,Modulator 9004 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS009022101_3NWY.pdb,3NWY,A,227,0,8,False,,failed,Modulator 262 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS009023301_1NH8.pdb,1NH8,A,276,0,8,False,,failed,Modulator 289 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS009026501_3DC2_complex.pdb,3DC2,A,526,12,0,True,,ok,Found 12 allosteric residues within 5Å of modulator
+AS009027001_1QP0.pdb,1QP0,A,338,0,0,False,,failed,Modulator 599 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS009028501_4A2U_complex.pdb,4A2U,A,224,22,0,True,,ok,Found 22 allosteric residues within 5Å of modulator
+AS010001101_4HYW_complex.pdb,4HYW,A,496,23,2,True,,warning,2 missing residues (0.4%); Found 23 allosteric residues
+AS010020901_1FX2_complex.pdb,1FX2,A,235,19,0,True,,ok,Found 19 allosteric residues within 5Å of modulator
+AS011017001_1PEQ_complex.pdb,1PEQ,A,679,0,13,False,,failed,Modulator 802 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS011024301_1I1Q_complex.pdb,1I1Q,A,512,18,0,True,,ok,Found 18 allosteric residues within 5Å of modulator
+AS013001801_2LDB_complex.pdb,2LDB,C,301,11,16,True,,warning,16 missing residues (5.3%); Found 11 allosteric residues
+AS013024601_1B4B.pdb,1B4B,A,71,0,0,False,,failed,Modulator 1 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS013029201_4PFK_complex.pdb,4PFK,A,319,13,1,True,,warning,1 missing residues (0.3%); Found 13 allosteric residues
+AS014002001_3BZ7_complex.pdb,3BZ7,A,703,25,43,True,,warning,43 missing residues (6.1%); Found 25 allosteric residues
+AS014002002_2JHR_complex.pdb,2JHR,A,776,17,0,True,,ok,Found 17 allosteric residues within 5Å of modulator
+AS015002101_3TW6_complex.pdb,3TW6,A,1006,16,65,True,,warning,65 missing residues (6.5%); Found 16 allosteric residues
+AS016002401_3GCD_complex.pdb,3GCD,A,202,21,0,True,,ok,Found 21 allosteric residues within 5Å of modulator
+AS017002701_4KKO_complex.pdb,4KKO,A,554,28,0,True,,ok,Found 28 allosteric residues within 5Å of modulator
+AS017002702_4KFB_complex.pdb,4KFB,A,556,16,0,True,,ok,Found 16 allosteric residues within 5Å of modulator
+AS017002703_4IG3_complex.pdb,4IG3,A,556,14,0,True,,ok,Found 14 allosteric residues within 5Å of modulator
+AS021003201_4ETZ.pdb,4ETZ,A,285,0,12,False,,failed,Modulator 501 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS021007101_4BO2_complex.pdb,4BO2,A,238,12,13,True,,warning,13 missing residues (5.5%); Found 12 allosteric residues
+AS021018901_1G3L.pdb,1G3L,A,292,0,0,False,,failed,Modulator 501 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS021028701_2OZ6_complex.pdb,2OZ6,A,201,21,5,True,,warning,5 missing residues (2.5%); Found 21 allosteric residues
+AS023005301_4N07_complex.pdb,4N07,A,262,9,0,True,,ok,Found 9 allosteric residues within 5Å of modulator
+AS023005302_3LSF_complex.pdb,3LSF,E,258,0,0,False,,failed,Modulator 802 not found or no nearby protein residues in chain E; Modulator not found in structure; No allosteric residues found near modulator
+AS023008201_4EAJ.pdb,4EAJ,C,289,0,10,False,,failed,Modulator 403 not found or no nearby protein residues in chain C; Modulator not found in structure; No allosteric residues found near modulator
+AS023008901_3QEL_complex.pdb,3QEL,B,353,14,9,True,,warning,9 missing residues (2.5%); Found 14 allosteric residues
+AS023022701_3M3F.pdb,3M3F,A,258,0,0,False,,failed,Modulator 800 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS025020602_3KH5_complex.pdb,3KH5,A,278,24,0,True,,ok,Found 24 allosteric residues within 5Å of modulator
+AS025029401_3C1N_complex.pdb,3C1N,A,458,12,10,True,,warning,10 missing residues (2.2%); Found 12 allosteric residues
+AS026004301_1W25.pdb,1W25,A,454,0,0,False,,failed,Modulator 503 not found or no nearby protein residues in chain A; Modulator 505 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS027004401_1F2U_complex.pdb,1F2U,A,149,19,0,True,,ok,Found 19 allosteric residues within 5Å of modulator
+AS027025501_4GRS.pdb,4GRS,A,333,0,0,False,,failed,Modulator 401 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS029013001_1DKU.pdb,1DKU,A,295,0,13,False,,failed,Modulator 1002 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS029024501_2P5M.pdb,2P5M,B,79,0,0,False,,failed,Modulator 201 not found or no nearby protein residues in chain B; Modulator not found in structure; No allosteric residues found near modulator
+AS033005702_1XTU_complex.pdb,1XTU,A;D;E;H,860,32,0,True,,ok,Modulator 4260 not found or no nearby protein residues in chain A; Modulator 5260 not found or no nearby protein residues in chain A; Modulator 8260 not found or no nearby protein residues in chain A; Modulator 1260 not found or no nearby protein residues in chain D; Modulator 5260 not found or no nearby protein residues in chain D; Modulator 8260 not found or no nearby protein residues in chain D; Modulator 1260 not found or no nearby protein residues in chain E; Modulator 4260 not found or no nearby protein residues in chain E; Modulator 8260 not found or no nearby protein residues in chain E; Modulator 1260 not found or no nearby protein residues in chain H; Modulator 4260 not found or no nearby protein residues in chain H; Modulator 5260 not found or no nearby protein residues in chain H; Found 32 allosteric residues within 5Å of modulator
+AS035006001_3E3N.pdb,3E3N,A,813,0,18,False,,failed,Modulator 843 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS035006002_2IEG.pdb,2IEG,A,803,0,21,False,,failed,Modulator 901 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS035006003_3BCR.pdb,3BCR,A,812,0,13,False,,failed,Modulator 940 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS035006004_4MRA.pdb,4MRA,A,806,0,19,False,,failed,Modulator 901 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS035020401_3N25.pdb,3N25,A,519,0,0,False,,failed,Modulator 1200 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS036006302_4AHS.pdb,4AHS,A,150,0,4,False,,failed,Modulator 1216 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS038006901_2Y0P_complex.pdb,2Y0P,A,847,34,20,True,,warning,20 missing residues (2.4%); Found 34 allosteric residues
+AS040028301_4N9I_complex.pdb,4N9I,A,202,21,0,True,,ok,Found 21 allosteric residues within 5Å of modulator
+AS041007901_4OO9.pdb,4OO9,A,407,0,188,False,,failed,Modulator 4005 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS041014201_1H78_complex.pdb,1H78,A,534,12,28,True,,warning,28 missing residues (5.2%); Found 12 allosteric residues
+AS043008402_4EO6_complex.pdb,4EO6,A,557,18,5,True,,warning,5 missing residues (0.9%); Found 18 allosteric residues
+AS043008403_3G86.pdb,3G86,A,557,0,5,False,,failed,Modulator 571 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS044008701_3F6G_complex.pdb,3F6G,B,115,13,8,True,,warning,8 missing residues (7.0%); Found 13 allosteric residues
+AS045009001_3LAJ.pdb,3LAJ,A,149,0,7,False,,failed,Modulator 200 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS045020201_3MZH_complex.pdb,3MZH,A,225,20,0,True,,ok,Found 20 allosteric residues within 5Å of modulator
+AS046009201_1M8P.pdb,1M8P,A,573,0,0,False,,failed,Modulator 574 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS047009501_4NLD.pdb,4NLD,A,500,0,5,False,,failed,Modulator 601 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS053010901_1FRP.pdb,1FRP,A,321,0,6,False,,failed,Modulator 338 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS053010903_1KZ8_complex.pdb,1KZ8,A,319,13,8,True,,warning,8 missing residues (2.5%); Found 13 allosteric residues
+AS054011201_2A69_complex.pdb,2A69,C,1119,22,0,True,,ok,Found 22 allosteric residues within 5Å of modulator
+AS055012501_1OF6.pdb,1OF6,A,350,0,1,False,,failed,Modulator 1370 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS055013601_3CSM_complex.pdb,3CSM,A,252,10,4,True,,warning,4 missing residues (1.6%); Found 10 allosteric residues
+AS055015901_3S87_complex.pdb,3S87,A,664,17,7,True,,warning,7 missing residues (1.1%); Found 17 allosteric residues
+AS055020101_1A3W_complex.pdb,1A3W,A,492,22,7,True,,warning,7 missing residues (1.4%); Found 22 allosteric residues
+AS055021101_3ZZH_complex.pdb,3ZZH,C,288,22,0,True,,ok,Found 22 allosteric residues within 5Å of modulator
+AS055024101_1W96_complex.pdb,1W96,A,549,26,4,True,,warning,4 missing residues (0.7%); Found 26 allosteric residues
+AS055024801_3OF1_complex.pdb,3OF1,A,246,21,0,True,,ok,Found 21 allosteric residues within 5Å of modulator
+AS055027701_3MKS_complex.pdb,3MKS,D,445,21,31,True,,warning,31 missing residues (7.0%); Found 21 allosteric residues
+AS057013401_4KH1.pdb,4KH1,B,147,0,0,False,,failed,Modulator 202 not found or no nearby protein residues in chain B; Modulator 203 not found or no nearby protein residues in chain B; Modulator 204 not found or no nearby protein residues in chain B; Modulator not found in structure; No allosteric residues found near modulator
+AS062014501_1IWH_complex.pdb,1IWH,A,141,11,0,True,,ok,Found 11 allosteric residues within 5Å of modulator
+AS062026603_2D5X_complex.pdb,2D5X,B,146,6,0,True,,ok,Found 6 allosteric residues within 5Å of modulator
+AS063014701_1XJF.pdb,1XJF,A,619,0,13,False,,failed,Modulator 1002 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS065021001_2RD5.pdb,2RD5,A,281,0,0,False,,failed,Modulator 1000 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS068016501_3IRH_complex.pdb,3IRH,A,450,11,5,True,,warning,5 missing residues (1.1%); Found 11 allosteric residues
+AS068016502_4LRL_complex.pdb,4LRL,B,445,5,10,True,,warning,10 missing residues (2.2%); Found 5 allosteric residues
+AS068028401_2VVT_complex.pdb,2VVT,A,269,25,5,True,,warning,5 missing residues (1.9%); Found 25 allosteric residues
+AS070016801_3KF0.pdb,3KF0,A,99,0,0,False,,failed,Modulator 201 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS070016802_4EJ8.pdb,4EJ8,A,99,0,0,False,,failed,Modulator 106 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS072017401_2FPL.pdb,2FPL,A,299,0,19,False,,failed,Modulator 401 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS073017501_3ETE.pdb,3ETE,A,495,0,0,False,,failed,Modulator 553 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS073017502_3MW9.pdb,3MW9,A,501,0,0,False,,failed,Modulator 604 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS073017503_3ETE_complex.pdb,3ETE,A;B;C;C;D;F,2970,40,0,True,,ok,Modulator 554 not found or no nearby protein residues in chain A; Modulator 554 not found or no nearby protein residues in chain B; Modulator 554 not found or no nearby protein residues in chain D; Modulator 554 not found or no nearby protein residues in chain F; Found 40 allosteric residues within 5Å of modulator
+AS073017504_3ETG_complex.pdb,3ETG,A;E,1002,20,0,True,,ok,Found 20 allosteric residues within 5Å of modulator
+AS073025001_11BG.pdb,11BG,A,124,0,0,False,,failed,Modulator 131 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS073027802_3PMA_complex.pdb,3PMA,B,238,8,-9,True,,ok,Found 8 allosteric residues within 5Å of modulator
+AS074018101_3PEE_complex.pdb,3PEE,A,244,23,0,True,,ok,Found 23 allosteric residues within 5Å of modulator
+AS075018201_1ZDS.pdb,1ZDS,A,335,0,0,False,,failed,Modulator 2500 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS076018301_3E5U_complex.pdb,3E5U,A,215,13,4,True,,warning,4 missing residues (1.9%); Found 13 allosteric residues
+AS077018401_4B1F_complex.pdb,4B1F,A,255,19,0,True,,ok,Found 19 allosteric residues within 5Å of modulator
+AS077018403_2W4I.pdb,2W4I,B,254,0,0,False,,failed,Modulator 1256 not found or no nearby protein residues in chain B; Modulator not found in structure; No allosteric residues found near modulator
+AS078018801_2Q5O.pdb,2Q5O,A,529,0,8,False,,failed,Modulator 5003 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS079019001_1UXV_complex.pdb,1UXV,A,499,18,0,True,,ok,Found 18 allosteric residues within 5Å of modulator
+AS080019501_4HO6.pdb,4HO6,A,288,0,0,False,,failed,Modulator 301 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS081023201_3DBA_complex.pdb,3DBA,A,171,27,0,True,,ok,Found 27 allosteric residues within 5Å of modulator
+AS082020301_2NW8_complex.pdb,2NW8,A,266,8,0,True,,ok,Found 8 allosteric residues within 5Å of modulator
+AS082021901_3EK5_complex.pdb,3EK5,E,239,16,0,True,,ok,Found 16 allosteric residues within 5Å of modulator
+AS083020501_1LTH.pdb,1LTH,R,313,0,0,False,,failed,Modulator 320 not found or no nearby protein residues in chain R; Modulator not found in structure; No allosteric residues found near modulator
+AS085020801_3HO8.pdb,3HO8,A,994,21,64,True,,warning,64 missing residues (6.4%); Found 21 allosteric residues
+AS086021201_2BTY.pdb,2BTY,A,282,0,0,False,,failed,Modulator 1283 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS086022401_3THO_complex.pdb,3THO,A,357,24,495,True,,failed,Too many missing residues: 138.7%
+AS086025301_3PG9_complex.pdb,3PG9,A,338,8,0,True,,ok,Found 8 allosteric residues within 5Å of modulator
+AS087021301_3D2P_complex.pdb,3D2P,A,424,23,8,True,,warning,8 missing residues (1.9%); Found 23 allosteric residues
+AS088021401_4KZT_complex.pdb,4KZT,A,431,26,0,True,,ok,Found 26 allosteric residues within 5Å of modulator
+AS090021801_2RDE.pdb,2RDE,A,0,0,0,False,,failed,Chain A not found or empty; Modulator not found in structure; No allosteric residues found near modulator
+AS091022202_3PJG_complex.pdb,3PJG,A,388,20,0,True,,ok,Found 20 allosteric residues within 5Å of modulator
+AS092022301_4A7W_complex.pdb,4A7W,A,226,16,9,True,,warning,9 missing residues (4.0%); Found 16 allosteric residues
+AS092024701_1UM8_complex.pdb,1UM8,A,327,25,37,True,,warning,37 missing residues (11.3%); Found 25 allosteric residues
+AS093022901_4BQH_complex.pdb,4BQH,A,521,27,20,True,,warning,20 missing residues (3.8%); Found 27 allosteric residues
+AS094023001_1JLR.pdb,1JLR,A,235,0,0,False,,failed,Modulator 303 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS095023401_2VD3.pdb,2VD3,A,289,0,0,False,,failed,Modulator 1290 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS095029101_1LVW_complex.pdb,1LVW,A,295,20,0,True,,ok,Found 20 allosteric residues within 5Å of modulator
+AS096023701_4MBS_complex.pdb,4MBS,A,346,32,690,True,,failed,Too many missing residues: 199.4%
+AS097024201_1I7S.pdb,1I7S,A,511,0,6,False,,failed,Modulator 601 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS099025701_2BE9_complex.pdb,2BE9,B,148,18,2,True,,warning,2 missing residues (1.4%); Found 18 allosteric residues
+AS100025801_3MWB.pdb,3MWB,B,299,0,7,False,,failed,Modulator 311 not found or no nearby protein residues in chain B; Modulator not found in structure; No allosteric residues found near modulator
+AS101025901_2QMX.pdb,2QMX,A,275,0,3,False,,failed,Modulator 303 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS103026101_4P2T.pdb,4P2T,A,192,0,2,False,,failed,Modulator 201 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS104026201_3NJQ.pdb,3NJQ,A,189,0,1,False,,failed,Modulator 197 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS105026301_1NJJ_complex.pdb,1NJJ,A,349,20,46,True,,warning,46 missing residues (13.2%); Found 20 allosteric residues
+AS106026801_2HVW_complex.pdb,2HVW,A,147,18,0,True,,ok,Found 18 allosteric residues within 5Å of modulator
+AS107027301_2VPR_complex.pdb,2VPR,A,197,23,7,True,,warning,7 missing residues (3.6%); Found 23 allosteric residues
+AS108027501_3ETL.pdb,3ETL,A,302,0,19,False,,failed,Modulator 401 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS109027901_3HO6.pdb,3HO6,A,251,0,4,False,,failed,Modulator 270 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS110028101_3R6S_complex.pdb,3R6S,A,225,22,0,True,,ok,Found 22 allosteric residues within 5Å of modulator
+AS111028201_3HFR.pdb,3HFR,A,259,0,7,False,,failed,Modulator 270 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS112028601_1QW7.pdb,1QW7,A,335,0,1,False,,failed,Modulator 702 not found or no nearby protein residues in chain A; Modulator not found in structure; No allosteric residues found near modulator
+AS113029301_1MP3_complex.pdb,1MP3,A,289,28,0,True,,ok,Found 28 allosteric residues within 5Å of modulator
+AS114029801_2PTM_complex.pdb,2PTM,A,192,22,0,True,,ok,Found 22 allosteric residues within 5Å of modulator

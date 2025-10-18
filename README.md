@@ -12,14 +12,14 @@ Allosteric sites regulate protein activity by binding modulators at locations di
 
 ### 1. ASBench Core Set
 
-- **Content**: 320 confirmed allosteric proteins with annotated residues.
+- **Content**: 320 confirmed allosteric proteins with bound modulators.
 - **Format**: XLS file (`ASBench_Core_Set.xls`) with columns:
-  - Allosteric Site
+  - Allosteric Site ID
   - PDB ID
   - Protein Name
   - Chain ID
-  - Residue ID (PDB) (core for labeling)
-- **Usage**: Used to generate labels for training (residues part of an allosteric site vs non-allosteric).
+  - Residue ID (PDB) - **identifies the MODULATOR (ligand), not protein residues**
+- **Usage**: Protein-modulator complex structures are used to compute allosteric sites. Allosteric site residues are defined as protein residues within 5Å of the bound modulator.
 
 ### 2. Protein Data Bank (PDB)
 

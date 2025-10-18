@@ -16,21 +16,56 @@
 
 ---
 
-## Phase 2: Data Exploration
+## Phase 2: Data Validation
 
-### 2.1 EDA Notebook (`notebooks/01_data_exploration.ipynb`)
-- [ ] Load ASBench annotations into pandas DataFrame
-- [ ] Count allosteric vs total residues per protein
-- [ ] Plot class imbalance histogram
-- [ ] Check PDB structure quality: resolution, missing residues, multi-chain
-- [ ] Visualize spatial distribution of allosteric sites (surface vs buried)
-- [ ] Compute distance between allosteric/active sites
+**Goal**: Validate that modulators exist in PDB structures and compute allosteric sites as residues within 5Å of bound modulators.
 
-### 2.2 Data Quality Script (`src/data_quality.py`)
-- [ ] Function: `check_pdb_quality(pdb_file)` → resolution, missing residues count
-- [ ] Function: `match_asbench_to_pdb(asbench_row, pdb_structure)` → handle numbering mismatches
-- [ ] Generate data quality report CSV: PDB ID, resolution, missing residues, annotation match status
-- [ ] Flag proteins with >20% missing residues for exclusion
+**Key Insight**: ASBench "Residue ID (PDB)" refers to the MODULATOR (ligand), not protein residues. Allosteric sites are defined as protein residues in contact with (< 5Å from) the modulator.
+
+**Philosophy**: Skip exploratory analysis and visualization. Focus only on blocking issues that would prevent model training. Exploration can be done later if needed.
+
+### 2.1 Dataset Validation Script (`src/validate_dataset.py`)
+
+**Implement**:
+- [x] `validate_protein(pdb_file, asbench_row)`:
+  - Parse PDB structure with Biopython
+  - Extract all residues from structure
+  - Map ASBench residue IDs to PDB residues (handle numbering gaps, insertion codes)
+  - Count: total_residues, allosteric_residues, missing_residues, matched_annotations
+  - Check resolution from PDB header
+  - Return: `ValidationResult(pdb_id, status, metrics)`
+
+- [x] `validate_all_proteins(annotations_csv, pdb_dir)`:
+  - Load annotations from `data/asbench/asbench_annotations.csv`
+  - Process all 235 entries (230 unique proteins)
+  - Track validation status: 'ok', 'warning', 'failed'
+  - Generate `data/processed/validation_report.csv`:
+    ```csv
+    pdb_file,pdb_id,chain_id,total_residues,allosteric_residues,missing_residues,
+    annotation_matched,resolution,status,notes
+    ```
+  - Print summary statistics:
+    - Class imbalance: "X allosteric residues / Y total residues (Z%)"
+    - Proteins by status: "N ok, M warning, K failed"
+  - Save usable proteins: `data/processed/clean_proteins.txt`
+    - Criteria: annotation_matched=True, missing_residues<20%, status='ok'
+
+- [x] Run validation:
+  ```bash
+  python src/validate_dataset.py
+  ```
+  - Actual output:
+    ```
+    Validating 235 entries...
+    ✓ 60 proteins validated successfully
+    ⚠ 56 proteins with warnings (minor issues)
+    ✗ 119 proteins failed (modulator not found)
+    
+    Class imbalance: 2,137 allosteric / 47,946 total residues (4.46%)
+    Saved clean protein list: data/processed/clean_proteins.txt (60 proteins)
+    Saved usable protein list: data/processed/usable_proteins.txt (116 proteins)
+    Saved validation report: data/processed/validation_report.csv
+    ```
 
 ---
 
@@ -56,8 +91,10 @@
 
 **Implement**:
 - [ ] `generate_positive_labels(asbench_annotations, pdb_structure)`:
-  - Map ASBench residue IDs to PDB residues
-  - Return list of (chain_id, res_num) tuples
+  - Find modulator (HETATM) using ASBench modulator residue ID
+  - Compute protein residues within 5Å of modulator using spatial distance
+  - Use Biopython NeighborSearch for efficient distance calculation
+  - Return list of (chain_id, res_num) tuples for allosteric site
   - Label = 1
 
 - [ ] `generate_negative_labels(pdb_structure, positive_labels, active_sites=None)`:
@@ -323,6 +360,7 @@ python scripts/predict.py --pdb data/pdb/1ABC.pdb --model outputs/models/gvp_v1.
 ## Deliverables Summary
 
 ### Code Files
+- `src/validate_dataset.py`: validate PDB structures and annotations
 - `src/preprocessing.py`: PDB parsing, feature computation
 - `src/labeling.py`: positive/negative label generation
 - `src/graph_builder.py`: graph construction for PyG
@@ -334,15 +372,19 @@ python scripts/predict.py --pdb data/pdb/1ABC.pdb --model outputs/models/gvp_v1.
 - `src/visualization.py`: PyMOL/NGLview visualization
 
 ### Scripts
+- `scripts/parse_asbench.py`: parse ASBench XLS to CSV
+- `scripts/download_missing_pdbs.py`: download PDB files (optional utility)
 - `scripts/train_baselines.py`: train baseline models
 - `scripts/ablation.py`: ablation studies
 - `scripts/predict.py`: CLI for inference
 
-### Notebooks
-- `notebooks/01_data_exploration.ipynb`: EDA
-- `notebooks/02_error_analysis.ipynb`: analyze predictions
+### Notebooks (Optional)
+- `notebooks/error_analysis.ipynb`: analyze predictions after training
+- `notebooks/exploration.ipynb`: exploratory analysis if needed
 
 ### Outputs
+- `data/processed/validation_report.csv`: data quality validation results
+- `data/processed/clean_proteins.txt`: list of usable proteins
 - `outputs/models/gvp_v1.pt`: trained model checkpoint
 - `outputs/baseline_results.csv`: baseline performance
 - `outputs/test_results.json`: final test metrics
