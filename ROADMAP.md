@@ -74,13 +74,13 @@
 ### 3.1 PDB Parser (`src/preprocessing.py`)
 
 **Implement**:
-- [ ] `parse_pdb(pdb_file)` → dict with:
+- [x] `parse_pdb(pdb_file)` → dict with:
   - `coords`: numpy array (N_atoms, 3)
   - `residues`: list of (chain_id, res_num, res_name)
   - `atoms`: list of (atom_name, element)
   - `b_factors`: numpy array
 
-- [ ] `compute_residue_features(structure)` → DataFrame with columns:
+- [x] `compute_residue_features(structure)` → DataFrame with columns:
   - `chain_id`, `res_num`, `res_name`
   - `sasa` (use FreeSASA or Biopython)
   - `depth` (distance from surface)
@@ -90,14 +90,14 @@
 ### 3.2 Label Generator (`src/labeling.py`)
 
 **Implement**:
-- [ ] `generate_positive_labels(asbench_annotations, pdb_structure)`:
+- [x] `generate_positive_labels(asbench_annotations, pdb_structure)`:
   - Find modulator (HETATM) using ASBench modulator residue ID
   - Compute protein residues within 5Å of modulator using spatial distance
   - Use Biopython NeighborSearch for efficient distance calculation
   - Return list of (chain_id, res_num) tuples for allosteric site
   - Label = 1
 
-- [ ] `generate_negative_labels(pdb_structure, positive_labels, active_sites=None)`:
+- [x] `generate_negative_labels(pdb_structure, positive_labels, active_sites=None)`:
   - Exclude residues within 10Å of any allosteric residue
   - Exclude active site residues (if available)
   - Stratified sampling:
@@ -107,8 +107,14 @@
   - Balance: 1:3 positive:negative ratio
   - Label = 0
 
-- [ ] `create_label_dataset(proteins_list)` → save to `data/processed/labels.csv`
+- [x] `create_label_dataset(proteins_list)` → save to `data/processed/labels.csv`
   - Columns: pdb_id, chain_id, res_num, label
+  
+**Results**:
+- Processed: 217 proteins successfully
+- Generated: 18,217 total labels (4,579 positive, 13,638 negative)
+- Ratio: 1:2.98 (target was 1:3)
+- Features computed: SASA, depth, secondary structure, Cα coordinates
 
 ---
 
