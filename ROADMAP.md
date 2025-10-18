@@ -1,488 +1,361 @@
-# Project Roadmap: Allosteric Site Prediction using GVP-GNN
+# Engineering Roadmap: Allosteric Site Prediction
 
-## Overview
-
-This roadmap outlines the step-by-step development process for building a machine learning model to predict allosteric binding sites in proteins. Each phase includes key considerations, potential pitfalls, and success criteria.
-
----
-
-## Phase 1: Project Setup & Data Acquisition
+## Phase 1: Setup & Data Acquisition
 
 ### 1.1 Environment Setup
-- [ ] Create Python virtual environment (Python 3.8+)
-- [ ] Install core dependencies:
-  - PyTorch ≥ 2.0 with CUDA support
-  - PyTorch Geometric
-  - Biopython for PDB parsing
-  - pandas, numpy, scikit-learn
-  - matplotlib, seaborn for visualization
-- [ ] Create project directory structure
-- [ ] Initialize git repository with proper `.gitignore`
-- [ ] Set up logging and configuration management
+- [x] Create virtual environment (Python 3.8+)
+- [x] Install dependencies: PyTorch ≥2.0, PyTorch Geometric, Biopython, pandas, numpy, scikit-learn
+- [x] Create directory structure: data/pdb, data/asbench, src/, outputs/, notebooks/
+- [x] Configure git with .gitignore
+- [x] Create config.yaml for hyperparameters and paths
 
 ### 1.2 Data Acquisition
-- [ ] Download ASBench Core Set dataset
-  - Verify: 320 proteins with allosteric annotations
-  - Parse XLS to extract: PDB ID, Chain ID, Residue IDs, Allosteric Site annotations
-- [ ] Download PDB structures for all ASBench proteins
-  - Use Biopython's PDB downloader or RCSB bulk download
-  - Verify structure quality (resolution, missing residues)
-- [ ] **Optional**: Download active site annotations (from CATALYTIC SITE ATLAS or PDBbind)
-  - Critical for defining high-quality negative examples
-
-**Success Criteria**: All 320 proteins downloaded with metadata organized in a database/CSV.
+- [ ] Download ASBench Core Set (http://mdl.shsmu.edu.cn/ASBench/) → `data/asbench/ASBench_Core_Set.xls`
+- [ ] Parse ASBench XLS: extract PDB ID, Chain ID, Residue IDs, annotations
+- [ ] Download 320 PDB structures using Biopython PDBList
+- [ ] Optional: Download CATALYTIC SITE ATLAS for active site annotations
 
 ---
 
-## Phase 2: Data Exploration & Quality Assessment
+## Phase 2: Data Exploration
 
-### 2.1 Exploratory Data Analysis
-- [ ] **Analyze class distribution**:
-  - Count allosteric residues vs total residues per protein
-  - Expected severe class imbalance (~1-5% allosteric residues)
-  - Visualize distribution across protein families
-- [ ] **Protein structure quality checks**:
-  - Resolution distribution
-  - Missing residues/chains
-  - Multi-chain complexes vs monomers
-- [ ] **Spatial analysis**:
-  - Are allosteric sites primarily surface-exposed or buried?
-  - Distance distribution between allosteric sites and active sites
-  - Clustering patterns of allosteric residues
+### 2.1 EDA Notebook (`notebooks/01_data_exploration.ipynb`)
+- [ ] Load ASBench annotations into pandas DataFrame
+- [ ] Count allosteric vs total residues per protein
+- [ ] Plot class imbalance histogram
+- [ ] Check PDB structure quality: resolution, missing residues, multi-chain
+- [ ] Visualize spatial distribution of allosteric sites (surface vs buried)
+- [ ] Compute distance between allosteric/active sites
 
-### 2.2 Data Quality Issues to Address
-- [ ] Handle missing residues in PDB files
-- [ ] Resolve annotation mismatches (ASBench IDs may not align with PDB numbering)
-- [ ] Deal with multiple chains/biological assemblies
-- [ ] Identify and handle protein mutations/variants
-
-**Success Criteria**: Documented data quality report with statistics and visualizations. Clear understanding of class imbalance and spatial properties.
+### 2.2 Data Quality Script (`src/data_quality.py`)
+- [ ] Function: `check_pdb_quality(pdb_file)` → resolution, missing residues count
+- [ ] Function: `match_asbench_to_pdb(asbench_row, pdb_structure)` → handle numbering mismatches
+- [ ] Generate data quality report CSV: PDB ID, resolution, missing residues, annotation match status
+- [ ] Flag proteins with >20% missing residues for exclusion
 
 ---
 
-## Phase 3: Data Preprocessing & Labeling Strategy
+## Phase 3: Preprocessing
 
-### 3.1 PDB Parsing (`preprocessing.py`)
-- [ ] Parse PDB files to extract:
-  - Atom coordinates (x, y, z)
-  - Residue name, number, and chain ID
-  - Atom types and elements
-  - B-factors (thermal motion indicators)
-  - Secondary structure (via DSSP if needed)
-- [ ] Compute per-residue features:
-  - Solvent accessible surface area (SASA)
-  - Depth (distance from surface)
-  - Conservation scores (if MSA available)
-  - Physicochemical properties
+### 3.1 PDB Parser (`src/preprocessing.py`)
 
-### 3.2 Label Generation Strategy ⚠️ CRITICAL
+**Implement**:
+- [ ] `parse_pdb(pdb_file)` → dict with:
+  - `coords`: numpy array (N_atoms, 3)
+  - `residues`: list of (chain_id, res_num, res_name)
+  - `atoms`: list of (atom_name, element)
+  - `b_factors`: numpy array
 
-**Positive Examples (Allosteric Residues)**:
-- [ ] Extract residue IDs from ASBench annotations
-- [ ] Map ASBench residue IDs to PDB residue numbering
-- [ ] Validate spatial clustering (allosteric residues should be spatially proximal)
-- [ ] Label = 1
+- [ ] `compute_residue_features(structure)` → DataFrame with columns:
+  - `chain_id`, `res_num`, `res_name`
+  - `sasa` (use FreeSASA or Biopython)
+  - `depth` (distance from surface)
+  - `secondary_structure` (use DSSP: H=helix, E=sheet, C=coil)
+  - `ca_coords` (x, y, z)
 
-**Negative Examples (Non-Allosteric Residues)**:
-This requires careful consideration to avoid false negatives and create meaningful negatives.
+### 3.2 Label Generator (`src/labeling.py`)
 
-- [ ] **Exclude known active sites**:
-  - Use CATALYTIC SITE ATLAS or literature annotations
-  - Active sites are functionally distinct from random surface patches
-- [ ] **Exclude residues near allosteric sites**:
-  - Remove residues within 8-10 Å of any allosteric residue
-  - Prevents label noise at allosteric site boundaries
-- [ ] **Stratified negative sampling**:
-  - Sample negatives proportionally from:
-    - Surface-exposed residues (high SASA)
-    - Buried residues (low SASA)
-    - Different secondary structures (helix, sheet, loop)
-  - Prevents model from learning trivial surface vs buried distinction
-- [ ] **Class balancing strategy**:
-  - Option A: Undersample negatives (e.g., 1:3 or 1:5 ratio)
-  - Option B: Use weighted loss function
-  - Option C: Use focal loss for hard example mining
-- [ ] Label = 0
+**Implement**:
+- [ ] `generate_positive_labels(asbench_annotations, pdb_structure)`:
+  - Map ASBench residue IDs to PDB residues
+  - Return list of (chain_id, res_num) tuples
+  - Label = 1
 
-**Success Criteria**: Balanced dataset with well-defined positive and negative examples. Documentation of negative sampling rationale.
+- [ ] `generate_negative_labels(pdb_structure, positive_labels, active_sites=None)`:
+  - Exclude residues within 10Å of any allosteric residue
+  - Exclude active site residues (if available)
+  - Stratified sampling:
+    - 40% surface-exposed (SASA > 20 Å²)
+    - 40% buried (SASA < 20 Å²)
+    - 20% intermediate
+  - Balance: 1:3 positive:negative ratio
+  - Label = 0
+
+- [ ] `create_label_dataset(proteins_list)` → save to `data/processed/labels.csv`
+  - Columns: pdb_id, chain_id, res_num, label
 
 ---
 
-## Phase 4: Graph Construction for GVP
+## Phase 4: Graph Construction
 
-### 4.1 Graph Representation (`graph_builder.py`)
+### 4.1 Graph Builder (`src/graph_builder.py`)
 
-**Node Definition**:
-- [ ] **Decision**: Atom-level vs Residue-level graphs
-  - Atom-level: More detailed but computationally expensive
-  - Residue-level: Use Cα or center of mass as node position
-  - **Recommendation**: Start with residue-level, then try atom-level
+**Implement**:
+- [ ] `build_protein_graph(pdb_file, features_df, labels_df)`:
+  
+  **Nodes** (residue-level):
+  - Position: Cα coordinates (x, y, z)
+  - Scalar features (dim=25):
+    - Residue type one-hot (20)
+    - SASA (1)
+    - Depth (1)
+    - B-factor (1)
+    - Secondary structure one-hot (3: H/E/C)
+  - Vector features (dim=2 vectors):
+    - Backbone orientation: N→Cα, Cα→C
+  - Labels: binary (0/1)
+  
+  **Edges** (KNN with K=10):
+  - Edge index: connect each node to 10 nearest neighbors
+  - Scalar features: Euclidean distance
+  - Vector features: unit direction vector
+  
+  Return: `torch_geometric.data.Data` object
 
-**Node Features**:
-- [ ] **Scalar features** (invariant to rotation):
-  - Residue type (20 amino acids, one-hot encoded)
-  - SASA (solvent accessibility)
-  - Depth from surface
-  - B-factor (flexibility)
-  - Secondary structure (helix/sheet/loop)
-- [ ] **Vector features** (equivariant to rotation):
-  - Backbone orientation vectors (N→Cα, Cα→C)
-  - Normal vector to local surface
-  - Direction to center of mass
-
-**Edge Construction**:
-- [ ] Distance-based connectivity:
-  - **K-nearest neighbors** (e.g., K=10) OR
-  - **Distance threshold** (e.g., < 10 Å between Cα atoms)
-  - Recommendation: Use KNN for consistent graph structure
-- [ ] Compute edge features:
-  - Euclidean distance (scalar)
-  - Unit direction vector (vector feature)
-  - Optionally: dihedral angles, edge type (covalent/non-covalent)
-
-**Graph-level Considerations**:
-- [ ] Handle disconnected components (inter-chain contacts)
-- [ ] Normalize node positions (center at origin)
-- [ ] Data augmentation: random rotations/translations during training
+- [ ] `build_dataset(protein_list)`:
+  - Process all 320 proteins
+  - Save graphs to `data/processed/graphs/`
+  - Use PyTorch Geometric InMemoryDataset format
 
 ### 4.2 Data Validation
-- [ ] Visualize sample graphs (node degrees, edge distributions)
-- [ ] Check for isolated nodes
-- [ ] Verify GVP feature dimensions (scalar vs vector)
-- [ ] Test batch processing with PyTorch Geometric `DataLoader`
-
-**Success Criteria**: Clean graph dataset saved in PyTorch Geometric format with documented feature dimensions.
-
----
-
-## Phase 5: Baseline Models
-
-### 5.1 Simple Baselines (Establish Lower Bounds)
-Before jumping to GVP-GNN, establish baselines:
-
-- [ ] **Random predictor**: Random assignment (should give ~1-5% precision)
-- [ ] **Sequence-based logistic regression**:
-  - Features: residue type, position, sequence context
-  - Establishes if sequence alone is predictive
-- [ ] **Structure-based random forest**:
-  - Features: SASA, depth, B-factor, secondary structure
-  - Tests if hand-crafted features capture signal
-- [ ] **Simple GNN** (e.g., GCN or GAT):
-  - Use only scalar features (no geometric vectors)
-  - Tests if graph structure helps without geometric information
-
-**Success Criteria**: Baseline results documented. Understanding of which features are most predictive.
+- [ ] Script: `validate_graphs.py`
+  - Check for isolated nodes
+  - Plot node degree distribution
+  - Verify feature dimensions: scalar (25), vector (2, 3)
+  - Test DataLoader batching
 
 ---
 
-## Phase 6: GVP-GNN Implementation
+## Phase 5: Baselines
 
-### 6.1 Model Architecture (`gvp_model.py`)
+### 5.1 Baseline Models (`src/baselines.py`)
 
-**Use Existing Implementation**:
-- [ ] Use [drorlab/gvp-pytorch](https://github.com/drorlab/gvp-pytorch) or PyG implementation
-- [ ] Adapt for node classification (not graph classification)
+**Implement**:
+- [ ] `RandomBaseline`: random predictions → measure expected precision (~2%)
+- [ ] `LogisticRegression`: features = [residue_type, SASA, depth, b_factor]
+- [ ] `RandomForest`: same features, tune n_estimators and max_depth
+- [ ] `SimpleGCN`: 3-layer GCN with only scalar features (no vectors)
 
-**Architecture Components**:
-- [ ] **Input embedding layer**:
-  - Project raw features to GVP hidden dimensions
-  - Example: (scalar_dim=20, vector_dim=3) → (128, 16)
-- [ ] **GVP-GNN layers** (3-5 layers):
-  - Message passing with geometric vector features
-  - Residual connections
+**Script** (`scripts/train_baselines.py`):
+- [ ] Train/val/test split: 224/48/48 proteins (70/15/15%)
+- [ ] Evaluate: Precision, Recall, F1, AUROC, AUPRC
+- [ ] Save results to `outputs/baseline_results.csv`
+
+---
+
+## Phase 6: GVP-GNN Model
+
+### 6.1 Model Implementation (`src/gvp_model.py`)
+
+**Use**: `drorlab/gvp-pytorch` library
+
+**Implement**:
+- [ ] `class AlloGVP(nn.Module)`:
+  
+  **Architecture**:
+  - Input embedding: project (25, 2) → (128, 16)
+  - 4x GVP-GNN layers with message passing
+  - Residual connections after each layer
   - Layer normalization
-- [ ] **Output head**:
-  - Pool GVP features to scalar
-  - 2-layer MLP
-  - Sigmoid activation for binary classification
-- [ ] **Loss function**:
-  - Binary cross-entropy with class weights OR
-  - Focal loss to handle class imbalance
+  - Output head:
+    - Pool vectors: take norms → scalars
+    - MLP: 128 → 256 → 128 → 1
+    - Sigmoid for binary classification
+  
+  **Forward**:
+  ```python
+  def forward(self, node_s, node_v, edge_index, edge_s, edge_v, batch):
+      # node_s: (N, 128) scalars
+      # node_v: (N, 16, 3) vectors
+      # Returns: (N, 1) probabilities
+  ```
 
-### 6.2 Model Configuration
-- [ ] Hyperparameter search space:
-  - Number of GVP layers: [3, 4, 5]
-  - Hidden dimensions: [(128, 16), (256, 32)]
-  - Dropout: [0.1, 0.2, 0.3]
-  - Learning rate: [1e-4, 5e-4, 1e-3]
-  - KNN value: [10, 15, 20]
-- [ ] Regularization:
-  - Dropout in MLP layers
-  - Weight decay
-  - Optional: graph dropout (edge dropout)
+- [ ] `class FocalLoss(nn.Module)`: implement focal loss with alpha=0.25, gamma=2.0
 
-**Success Criteria**: Working GVP-GNN model that can forward pass a batch of protein graphs.
+### 6.2 Hyperparameters (`config.yaml`)
+```yaml
+model:
+  hidden_dims: [128, 16]
+  num_layers: 4
+  dropout: 0.2
+  mlp_dims: [256, 128]
 
----
-
-## Phase 7: Training Pipeline
-
-### 7.1 Data Splitting Strategy
-- [ ] **Protein-level splits** (critical to avoid data leakage):
-  - Train: 70% of proteins (~224 proteins)
-  - Validation: 15% (~48 proteins)
-  - Test: 15% (~48 proteins)
-- [ ] **Stratify by**:
-  - Protein family (avoid related proteins in different splits)
-  - Size (balance small and large proteins)
-- [ ] Consider sequence similarity clustering (e.g., CD-HIT at 30% identity)
-
-### 7.2 Training Loop (`train.py`)
-- [ ] Implement training loop:
-  - Mini-batch training (may need to batch by number of nodes, not graphs)
-  - Gradient accumulation if memory-limited
-  - Mixed precision training (FP16) for efficiency
-- [ ] Optimizer: Adam with learning rate scheduling
-  - Warmup for first few epochs
-  - ReduceLROnPlateau or cosine annealing
-- [ ] Early stopping based on validation F1-score
-- [ ] Checkpointing (save best model on validation set)
-- [ ] Logging:
-  - TensorBoard or Weights & Biases
-  - Track loss, precision, recall, F1, AUROC per epoch
-
-### 7.3 Handling Class Imbalance
-- [ ] Option 1: Weighted loss (weight inversely proportional to class frequency)
-- [ ] Option 2: Focal loss (focus on hard examples)
-- [ ] Option 3: Oversample positive class (duplicate graphs with allosteric sites)
-- [ ] **Recommendation**: Start with weighted loss, experiment with focal loss
-
-**Success Criteria**: Model trains without errors, converges on training set, generalizes to validation set.
+training:
+  lr: 0.0005
+  weight_decay: 0.0001
+  batch_size: 8
+  epochs: 100
+  loss: focal_loss
+```
 
 ---
 
-## Phase 8: Evaluation & Analysis
+## Phase 7: Training
 
-### 8.1 Quantitative Metrics
-Evaluate on the held-out test set:
+### 7.1 Data Splitting (`src/data_split.py`)
+- [ ] `split_proteins(protein_list, seed=42)`:
+  - Use CD-HIT or MMseqs2 for sequence clustering at 30% identity
+  - Ensure no homologs across train/val/test
+  - Stratify by protein size
+  - Save splits to `data/processed/splits/{train,val,test}.txt`
 
-- [ ] **Threshold-based metrics** (at optimal threshold):
-  - Precision, Recall, F1-score
+### 7.2 Training Script (`src/train.py`)
+
+**Implement**:
+- [ ] `class Trainer`:
+  - Mixed precision training (torch.cuda.amp)
+  - Gradient accumulation (if memory limited)
+  - Learning rate scheduler: ReduceLROnPlateau (patience=10)
+  - Early stopping: patience=20 on val_f1
+  - Checkpoint saving: best model by val_f1
+  
+- [ ] Training loop:
+  ```python
+  for epoch in range(num_epochs):
+      train_loss = train_epoch(model, train_loader, optimizer)
+      val_metrics = evaluate(model, val_loader)
+      log_metrics(epoch, train_loss, val_metrics)
+      scheduler.step(val_metrics['f1'])
+      if early_stop.should_stop(val_metrics['f1']):
+          break
+  ```
+
+- [ ] Logging: TensorBoard
+  - Track: loss, precision, recall, f1, auroc, auprc
+  - Plot per-epoch curves
+
+### 7.3 Run Command
+```bash
+python src/train.py --config config.yaml --output outputs/models/gvp_v1.pt
+```
+
+---
+
+## Phase 8: Evaluation
+
+### 8.1 Evaluation Script (`src/evaluate.py`)
+
+**Implement**:
+- [ ] `evaluate_model(model, test_loader)`:
+  - Compute: Precision, Recall, F1, AUROC, AUPRC
+  - Top-K accuracy: K=5, 10, 20 (per protein)
   - Confusion matrix
-- [ ] **Threshold-independent metrics**:
-  - ROC-AUC
-  - Precision-Recall AUC (better for imbalanced data)
-- [ ] **Ranking metrics**:
-  - Top-K accuracy (K=5, 10, 20 residues)
-  - Mean Average Precision
-  - Critical for drug discovery: "Are the top predictions correct?"
-- [ ] **Per-protein analysis**:
-  - F1-score per protein
-  - Identify failure cases
+  - Per-protein F1 scores
+  - Save to `outputs/test_results.json`
 
-### 8.2 Ablation Studies
-Understand what contributes to model performance:
+- [ ] `plot_results(predictions, labels)`:
+  - ROC curve
+  - PR curve
+  - Per-protein F1 distribution
+  - Save figures to `outputs/figures/`
 
-- [ ] Remove vector features (scalar-only GNN)
-- [ ] Remove geometric information (shuffle node positions)
-- [ ] Use different edge construction strategies
-- [ ] Use different node features (SASA, depth, etc.)
-- [ ] Vary number of GVP layers
+### 8.2 Ablation Studies (`scripts/ablation.py`)
+- [ ] Remove vector features → measure ΔF1
+- [ ] Shuffle node positions → measure ΔF1
+- [ ] Vary KNN: K=5, 10, 15, 20 → plot F1 vs K
+- [ ] Vary GVP layers: 2, 3, 4, 5 → plot F1 vs layers
 
-### 8.3 Error Analysis
-- [ ] Analyze false positives:
-  - Are they near allosteric sites?
-  - Are they structurally similar to allosteric sites?
-  - Are they active sites mislabeled as negative?
-- [ ] Analyze false negatives:
-  - Are they on protein surface or buried?
-  - Are they poorly annotated in ASBench?
-  - Do they have unusual amino acid composition?
-
-### 8.4 Biological Validation
-- [ ] Compare predictions to literature (case studies on well-known proteins)
-- [ ] Check if predicted sites have known regulatory function
-- [ ] Visualize predictions on 3D structures (PyMOL/ChimeraX)
-- [ ] Compute enrichment of predicted sites in:
-  - Protein-protein interfaces
-  - Flexible regions (high B-factors)
-  - Evolutionary conserved patches
-
-**Success Criteria**: Test set F1 > 0.4 (reasonable given class imbalance), Top-10 precision > 0.3, clear understanding of model strengths/weaknesses.
+### 8.3 Error Analysis (`notebooks/02_error_analysis.ipynb`)
+- [ ] Load false positives: check if near allosteric sites (within 5-10Å)
+- [ ] Load false negatives: check SASA, depth, secondary structure distributions
+- [ ] Visualize error cases in PyMOL
 
 ---
 
-## Phase 9: Inference & Visualization
+## Phase 9: Inference
 
-### 9.1 Inference Pipeline (`inference.py`)
-- [ ] Input: Any PDB file
-- [ ] Pipeline:
-  1. Parse PDB
-  2. Compute features
-  3. Build graph
-  4. Run model inference
-  5. Output: per-residue allosteric probability
+### 9.1 Inference Pipeline (`src/inference.py`)
+
+**Implement**:
+- [ ] `predict_allosteric_sites(pdb_file, model_path)`:
+  ```python
+  # 1. Parse PDB
+  structure = parse_pdb(pdb_file)
+  # 2. Compute features
+  features = compute_residue_features(structure)
+  # 3. Build graph
+  graph = build_protein_graph(pdb_file, features, labels=None)
+  # 4. Run inference
+  model.eval()
+  probs = model(graph)
+  # 5. Return DataFrame: chain_id, res_num, probability
+  return results_df
+  ```
+
 - [ ] Handle edge cases:
-  - Missing residues
-  - Non-standard amino acids
-  - Multi-chain complexes
-- [ ] Batch processing for multiple proteins
+  - Missing residues: skip, log warning
+  - Non-standard amino acids: map to closest standard (e.g., MSE→MET)
+  - Multi-chain: process each chain separately
 
-### 9.2 Visualization (`visualization.py`)
-- [ ] **3D structure rendering**:
-  - Color residues by predicted probability (blue → red gradient)
-  - Highlight top-K predictions
-- [ ] **Integration with molecular viewers**:
-  - PyMOL script generation
-  - ChimeraX attribute file
-  - NGLViewer for web (interactive Jupyter widget)
-- [ ] **Summary plots**:
-  - Per-residue probability histogram
-  - Spatial distribution on protein surface
-  - Predicted allosteric sites overlaid on secondary structure
+### 9.2 Visualization (`src/visualization.py`)
 
-**Success Criteria**: Easy-to-use inference script that outputs publication-quality visualizations.
+**Implement**:
+- [ ] `generate_pymol_script(pdb_file, predictions, output_pml)`:
+  - Color residues by probability: blue (0.0) → red (1.0)
+  - Highlight top-10 predictions as sticks
+  - Save script to run in PyMOL
 
----
+- [ ] `visualize_in_nglview(pdb_file, predictions)`:
+  - Return NGLview widget for Jupyter
+  - Color by probability gradient
 
-## Phase 10: Model Interpretability
+- [ ] `plot_predictions(predictions_df)`:
+  - Histogram of probabilities
+  - Top-20 predictions table
+  - Save figure
 
-### 10.1 Attention Analysis
-- [ ] If using attention mechanisms:
-  - Visualize attention weights between residues
-  - Identify which neighbors influence allosteric predictions
-- [ ] GNNExplainer or similar tools:
-  - Extract important subgraphs for each prediction
-  - Understand local structural motifs
-
-### 10.2 Feature Importance
-- [ ] Gradient-based attribution (integrated gradients)
-- [ ] Permutation importance for node features
-- [ ] Analyze learned embeddings (t-SNE/UMAP)
-
-**Success Criteria**: Interpretable explanations that align with biological knowledge.
+### 9.3 CLI Tool (`scripts/predict.py`)
+```bash
+python scripts/predict.py --pdb data/pdb/1ABC.pdb --model outputs/models/gvp_v1.pt --output outputs/predictions/1ABC_predictions.csv --visualize
+```
 
 ---
 
-## Phase 11: Advanced Improvements (Optional)
+## Phase 10: Advanced (Optional)
 
-### 11.1 Data Augmentation
-- [ ] Increase training data:
-  - AlphaFold-predicted structures (if experimental PDBs insufficient)
-  - Homology models for related proteins
-- [ ] Weak supervision:
-  - Proteins with known allosteric modulators (but no residue annotations)
-  - Use binding pocket detection tools as pseudo-labels
+### 10.1 Semi-Supervised Pre-training
+- [ ] Download unlabeled PDB structures (10K proteins)
+- [ ] Self-supervised task: mask residues, predict residue type
+- [ ] Pre-train GVP encoder
+- [ ] Fine-tune on ASBench
 
-### 11.2 Semi-Supervised Learning
-- [ ] Pre-train on large unlabeled PDB:
-  - Self-supervised tasks: masked residue prediction, distance prediction
-  - Transfer learning from structure prediction models
-- [ ] Fine-tune on ASBench allosteric data
+### 10.2 Multi-Task Learning
+- [ ] Add active site prediction head (if active site data available)
+- [ ] Shared GVP encoder, two output heads
+- [ ] Joint loss: L = L_allosteric + 0.5 * L_active
 
-### 11.3 Multi-Task Learning
-- [ ] Jointly predict:
-  - Allosteric sites
-  - Active sites
-  - Protein-protein interfaces
-  - Binding pockets
-- [ ] Shared encoder, task-specific heads
-- [ ] May improve feature learning
-
-### 11.4 Ensemble Models
-- [ ] Train multiple models with different:
-  - Random seeds
-  - Architectures (GVP, E(3)-equivariant, Transformer)
-  - Feature sets
-- [ ] Ensemble via averaging or stacking
-
-**Success Criteria**: Improved performance over baseline GVP-GNN.
+### 10.3 Model Interpretability
+- [ ] Implement GNNExplainer for GVP
+- [ ] Extract important subgraphs for each prediction
+- [ ] Visualize attention weights (if using attention)
 
 ---
 
-## Phase 12: Documentation & Deployment
+## Deliverables Summary
 
-### 12.1 Code Documentation
-- [ ] Docstrings for all functions/classes
-- [ ] Type hints throughout codebase
-- [ ] Example notebooks for each module
-- [ ] Update README with installation and usage instructions
+### Code Files
+- `src/preprocessing.py`: PDB parsing, feature computation
+- `src/labeling.py`: positive/negative label generation
+- `src/graph_builder.py`: graph construction for PyG
+- `src/baselines.py`: baseline models
+- `src/gvp_model.py`: GVP-GNN implementation
+- `src/train.py`: training loop
+- `src/evaluate.py`: evaluation metrics
+- `src/inference.py`: prediction pipeline
+- `src/visualization.py`: PyMOL/NGLview visualization
 
-### 12.2 Model Release
-- [ ] Save trained model weights
-- [ ] Document hyperparameters and training details
-- [ ] Create inference API (Flask/FastAPI web server)
-- [ ] Docker container for reproducibility
+### Scripts
+- `scripts/train_baselines.py`: train baseline models
+- `scripts/ablation.py`: ablation studies
+- `scripts/predict.py`: CLI for inference
 
-### 12.3 Paper/Report
-- [ ] Write up methodology
-- [ ] Compare to existing methods (PAIRpred, Allosite, PASSerRank)
-- [ ] Benchmark results
-- [ ] Case studies on novel proteins
+### Notebooks
+- `notebooks/01_data_exploration.ipynb`: EDA
+- `notebooks/02_error_analysis.ipynb`: analyze predictions
 
-**Success Criteria**: Reproducible research artifact with clear documentation.
-
----
-
-## Key Risks & Mitigation Strategies
-
-| Risk | Mitigation |
-|------|------------|
-| **Severe class imbalance** | Use focal loss, stratified negative sampling, evaluate with AUPRC |
-| **Limited training data (320 proteins)** | Pre-train on unlabeled PDB, data augmentation, avoid overfitting |
-| **Annotation quality issues** | Manual validation of subset, exclude low-confidence annotations |
-| **GPU memory constraints** | Use gradient accumulation, smaller batch sizes, residue-level graphs |
-| **Model doesn't learn** | Start with simpler baselines, ablation studies, check for bugs in graph construction |
-| **Predictions not interpretable** | Use attention mechanisms, GNNExplainer, compare to structural biology literature |
+### Outputs
+- `outputs/models/gvp_v1.pt`: trained model checkpoint
+- `outputs/baseline_results.csv`: baseline performance
+- `outputs/test_results.json`: final test metrics
+- `outputs/figures/`: plots and visualizations
 
 ---
 
-## Success Metrics by Phase
+## Target Metrics
 
-| Phase | Key Metric | Target |
-|-------|------------|--------|
-| Phase 2 | Data quality report completed | 100% |
-| Phase 4 | Graphs constructed for all proteins | 100% |
-| Phase 5 | Baseline F1-score | > 0.2 |
-| Phase 6 | GVP-GNN trains without errors | Yes |
-| Phase 8 | Test set F1-score | > 0.4 |
-| Phase 8 | Top-10 precision | > 0.3 |
-| Phase 8 | Test set AUPRC | > 0.25 |
-
----
-
-## Timeline Estimate
-
-- **Phase 1-2** (Setup & EDA): 1 week
-- **Phase 3-4** (Preprocessing & Graphs): 2 weeks
-- **Phase 5** (Baselines): 1 week
-- **Phase 6-7** (GVP implementation & training): 2 weeks
-- **Phase 8** (Evaluation): 1 week
-- **Phase 9-10** (Inference & interpretability): 1 week
-- **Phase 11** (Advanced improvements): 2-4 weeks (optional)
-- **Phase 12** (Documentation): 1 week
-
-**Total**: ~11-15 weeks for a complete implementation with evaluation.
-
----
-
-## References & Resources
-
-### Papers
-- Dror Lab GVP Paper: "Learning from Protein Structure with Geometric Vector Perceptrons"
-- ASBench: "ASBench: benchmarking sets for allosteric discovery"
-- Allosite: "Computational methods for allosteric site identification"
-
-### Code Repositories
-- [drorlab/gvp-pytorch](https://github.com/drorlab/gvp-pytorch)
-- PyTorch Geometric documentation
-- Biopython PDB module
-
-### Datasets
-- ASBench Core Set
-- RCSB PDB
-- CATALYTIC SITE ATLAS (for active sites)
-
----
-
-## Next Immediate Steps
-
-1. **Set up environment** (`requirements.txt`, directories)
-2. **Download ASBench dataset** and explore it
-3. **Download a subset of PDB files** (start with 10-20 proteins)
-4. **Build PDB parser** and validate on test proteins
-5. **Implement negative sampling strategy** with stratification
-6. **Build graph construction** and visualize sample graphs
-
-Let's start building! 🚀
-
+| Metric | Target |
+|--------|--------|
+| Test F1 | > 0.4 |
+| Test AUPRC | > 0.25 |
+| Top-10 Precision | > 0.3 |
+| Baseline improvement | +0.2 F1 |
