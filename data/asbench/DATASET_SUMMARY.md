@@ -59,7 +59,7 @@ The structured CSV contains the following columns:
 | `entry_id` | Sequential entry number | 0, 1, 2, ... |
 | `pdb_id` | PDB structure identifier | 3UO9, 4B2D, 3H6O |
 | `chain_id` | Chain identifier in PDB | A, B, C |
-| `residue_ids` | Allosteric site residue numbers (PDB numbering) | 2, 1532, 541;603 |
+| `residue_ids` | **MODULATOR residue ID** (not protein residues) | 2, 1532, 541;603 |
 | `protein_name` | Full protein name | "Glutaminase kidney isoform" |
 | `allosteric_site` | ASBench site identifier | AS001000501 |
 | `Gene Name` | Gene symbol | GLS, PKM, PKLR |
@@ -73,10 +73,13 @@ The structured CSV contains the following columns:
 
 ### Residue ID Format
 
-Allosteric site residues are specified in the `residue_ids` column:
-- **Single residue**: `541` (one residue at position 541)
-- **Multiple residues**: `800;900` (residues at positions 800 and 900, semicolon-separated)
-- **Note**: Residue numbering follows PDB convention (not sequential 1-N)
+**IMPORTANT**: The `residue_ids` column contains MODULATOR (ligand) residue IDs, NOT protein allosteric site residues!
+
+- **Single modulator**: `541` (modulator at position 541 in PDB)
+- **Multiple modulators**: `800;900` (two modulators at positions 800 and 900)
+- **Usage**: These IDs locate the modulator (HETATM) in the PDB structure
+
+**Allosteric site residues are computed**: Protein residues within 5Å of the modulator are the allosteric binding site.
 
 ### Chain Information
 
@@ -98,12 +101,13 @@ Most proteins have single chains, but some are multi-chain complexes:
 - ⚠️ Some PDB files may have missing residues (common in X-ray structures)
 - ⚠️ Need to handle residue numbering mismatches between ASBench and PDB
 
-## Expected Class Imbalance
+## Actual Class Imbalance (After Validation)
 
-Based on 230-235 proteins:
-- **Total residues**: ~100,000 (assuming ~300 residues per protein)
-- **Allosteric residues**: ~500-1,000 (estimated 2-5 residues per site)
-- **Class imbalance**: ~0.5-1% positive class
+Based on 116 validated proteins:
+- **Total residues**: 47,946
+- **Allosteric residues**: 2,137 (computed as residues within 5Å of modulators)
+- **Class imbalance**: 4.46% positive class
+- **Average allosteric site size**: ~18 residues per protein
 
 This severe imbalance requires:
 1. Careful negative sampling strategy
@@ -120,9 +124,9 @@ This severe imbalance requires:
 
 ### Phase 3: Preprocessing
 - [ ] Parse PDB files and extract atom coordinates
-- [ ] Map ASBench residue IDs to PDB residues
-- [ ] Handle residue numbering mismatches
-- [ ] Generate negative labels with stratified sampling
+- [ ] Find modulators in structures using ASBench modulator residue IDs
+- [ ] Compute allosteric sites as protein residues within 5Å of modulators
+- [ ] Generate negative labels with stratified sampling (exclude 10Å buffer around allosteric sites)
 - [ ] Compute structural features (SASA, depth, secondary structure)
 
 ## Sample Entries

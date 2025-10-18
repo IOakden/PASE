@@ -84,3 +84,12 @@ htmlcov/
 # Documentation builds
 docs/_build/
 
+# Frontend / Node.js
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.env
+frontend/.env.local
+frontend/.env.production
+frontend/coverage/
+frontend/*.local
