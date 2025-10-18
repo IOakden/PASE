@@ -1,0 +1,25 @@
+# FastAPI Backend Dependencies
+
+# Web Framework
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+python-multipart>=0.0.6  # For file uploads
+
+# CORS
+fastapi-cors>=0.0.6
+
+# Data Processing
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+
+# Biopython for PDB parsing
+biopython>=1.81
+
+# Scientific Computing (shared with ML pipeline)
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Optional: For future ML model integration
+# torch>=2.0.0
+# torch-geometric>=2.3.0
+
