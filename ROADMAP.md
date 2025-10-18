@@ -19,12 +19,12 @@
 ## Phase 2: Data Exploration
 
 ### 2.1 EDA Notebook (`notebooks/01_data_exploration.ipynb`)
-- [ ] Load ASBench annotations into pandas DataFrame
-- [ ] Count allosteric vs total residues per protein
-- [ ] Plot class imbalance histogram
+- [ ] Load ASBench annotations into pandas DataFrame 
+- [ ] Count allosteric vs total residues per protein 
+- [ ] Plot class imbalance histogram  
 - [ ] Check PDB structure quality: resolution, missing residues, multi-chain
 - [ ] Visualize spatial distribution of allosteric sites (surface vs buried)
-- [ ] Compute distance between allosteric/active sites
+- [ ] Compute distance between allosteric/active sites 
 
 ### 2.2 Data Quality Script (`src/data_quality.py`)
 - [ ] Function: `check_pdb_quality(pdb_file)` → resolution, missing residues count
